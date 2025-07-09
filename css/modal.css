@@ -329,6 +329,15 @@
   padding-bottom: 15px;
 }
 
+.modal-new-note-original-info-upper-times-btn.active {
+  background-color: #007b99;
+  color: white;
+}
+
+.swiper-dropper {
+  padding: 60px 0 25px 0 !important;
+}
+
 .input-error {
   border: 1px solid red !important;
 }
@@ -490,6 +499,7 @@
   width: 188px;
   text-align: center;
   margin: 0 auto;
+  padding-bottom: 10px !important;
 }
 
 .day-active-modal {
@@ -623,7 +633,7 @@
   gap: 25px;
 }
 
-.submit-autorization-pay{
+.submit-autorization-pay {
   width: 50%;
 }
 
@@ -825,6 +835,10 @@
 
     gap: 5px;
 
+  }
+
+  .cart__services-item-prices-upper {
+    gap: 7px;
   }
 
   .title-timer {

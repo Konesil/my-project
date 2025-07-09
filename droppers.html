@@ -20,6 +20,8 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@400;700&display=swap"
@@ -15006,7 +15008,8 @@
                                 <button class="btn-reset btn-orange swiper-slide-content-popup">
                                     Записаться
                                 </button>
-                                <a target="_blank" class="btn-reset swiper-slide-content-more" href="droppers_more.html">
+                                <a target="_blank" class="btn-reset swiper-slide-content-more"
+                                    href="droppers_more.html">
                                     подробнее
                                 </a>
 
@@ -15038,7 +15041,8 @@
                                 <button class="btn-reset btn-orange swiper-slide-content-popup">
                                     Записаться
                                 </button>
-                                <a target="_blank" class="btn-reset swiper-slide-content-more" href="droppers_more.html">
+                                <a target="_blank" class="btn-reset swiper-slide-content-more"
+                                    href="droppers_more.html">
                                     подробнее
                                 </a>
 
@@ -15075,7 +15079,8 @@
                                 <button class="btn-reset btn-orange swiper-slide-content-popup">
                                     Записаться
                                 </button>
-                                <a target="_blank" class="btn-reset swiper-slide-content-more" href="droppers_more.html">
+                                <a target="_blank" class="btn-reset swiper-slide-content-more"
+                                    href="droppers_more.html">
                                     подробнее
                                 </a>
 
@@ -15112,7 +15117,8 @@
                                 <button class="btn-reset btn-orange swiper-slide-content-popup">
                                     Записаться
                                 </button>
-                                <a target="_blank" class="btn-reset swiper-slide-content-more" href="droppers_more.html">
+                                <a target="_blank" class="btn-reset swiper-slide-content-more"
+                                    href="droppers_more.html">
                                     подробнее
                                 </a>
 
@@ -17505,7 +17511,7 @@
                 <!-- </div> -->
                 <input class="number-authorization" type="tel" placeholder="+ 7 ( _ _ _ ) _ _ _ - _ _ - __" />
                 <input class="email-authorization" type="email" placeholder="Email" />
-                <div class="forgot-pass">
+                <div style="padding: 10px 0 10px;" class="forgot-pass">
                     <div class="policy">
                           <label class="custom-check">
                             <input type="checkbox" checked>
@@ -17514,7 +17520,7 @@
                               </label>
                     </div>
                 </div>
-                <div class="form-error"></div>
+                <div style="padding-bottom: 0;" class="form-error"></div>
                 <button id="registerBtn" class="submit-autorization" type="submit">Зарегистрироваться</button>
                 <!-- <button id="openRegisterFromPatient" class="submit-autorization" style="display: none;" type="button">
                     Зарегистрироваться
@@ -17553,17 +17559,12 @@
             </div>
             <div class="date-modal">
                 <div class="days-modal">
-                    <img src="img/arrow.png" alt="">
-                    <div class="day-modal">
-                        18 ноября
-                    </div>
-                    <div class="day-active-modal">
-                        19 ноября
-                    </div>
-                    <div class="day-modal">
-                        20 ноября
-                    </div>
-                    <img style="transform: rotate(180deg);" src="img/arrow.png" alt="">
+                    <img style="cursor: pointer;" class="arrow-prev" src="img/arrow.png" alt="prev">
+                    <div class="day-modal" id="prevDay"></div>
+                    <div class="day-active-modal" id="currentDay"></div>
+                    <div class="day-modal" id="nextDay"></div>
+                    <img class="arrow-next" src="img/arrow.png" style="transform: rotate(180deg); cursor: pointer;"
+                        alt="next">
                 </div>
                 <div class="modal-new-note-original-info-upper-times info-upper-times-dropper">
                     <button class="modal-new-note-original-info-upper-times-btn btn-reset">
@@ -17587,19 +17588,38 @@
 
                 </div>
             </div>
-            <div class="place-modal">
-                <div class="text-place">
-                    <div class="adress-place">
-                        <div
-                            style="background-color: rgba(16, 118, 33, 1); width: 11px; height: 11px; border-radius: 20px;">
-                        </div>
-                        <span>м. Тверская</span>
+            <div style="gap: 0; background-color: transparent; width: auto;" class="place-modal custom-dropdown"
+                id="placeSelector">
+                <div>
+                    <div style="justify-content: center" class="our-doctors__upper-select-local-option selected-option">
+                        <span class="status-indicator green" id="metroColor"></span>
+                        <span style="flex: none;" class="text" id="metroText">м. Тверская</span>
+
                     </div>
-                    <div class="all-adress">
-                        ул. Тверская, д. 6. стр. 6, 2 этаж
-                    </div>
+                    <ul class="dropdown-options list-reset" style="display: none; background-color: #f3fbfd;"
+                        id="metroOptions">
+                        <li class="option" data-metro="м. Тверская" data-color="green"
+                            data-address="ул. Тверская, д. 6. стр. 6, 2 этаж">
+                            <label><span class="status-indicator green"></span>Тверская</label>
+                        </li>
+                        <li class="option" data-metro="м. Арбатская" data-color="red"
+                            data-address="ул. Арбат, д. 12, 3 этаж">
+                            <label><span class="status-indicator red"></span>Арбатская</label>
+                        </li>
+                        <li class="option" data-metro="м. Белорусская" data-color="brown"
+                            data-address="ул. Грузинская, д. 10, 1 этаж">
+                            <label><span class="status-indicator brown"></span>Белорусская</label>
+                        </li>
+                    </ul>
+                    <div class="all-adress" id="metroAddress">ул. Тверская, д. 6. стр. 6, 2 этаж</div>
+
                 </div>
-                <img style="transform: rotate(270deg);" src="img/arrow.png" alt="">
+                <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                    <path d="M2 2L10 10L18 2" stroke="#007B99" stroke-width="4" stroke-linecap="round"
+                        stroke-linejoin="round" />
+
+                </svg>
             </div>
 
             <button style="margin-top: 50px; background-color: rgba(0, 123, 153, 1);"
@@ -17638,94 +17658,408 @@
 
                     <div class="our-doctors__content">
                         <div class="our-doctors__info">
-                            <div class="swiper our-doctors__swiper">
-                                <div class="swiper-wrapper">
-                                    <!-- <div class="swiper-slide"> -->
-
-                                    <div class="swiper-slide-item">
-                                        <div class="swiper-slide-img-container">
-                                            <img src="./img/doctors-slide-1.png" alt="Доктор"
-                                                class="swiper-slide-img" />
-                                        </div>
-                                        <div class="swiper-slide-content">
-                                            <div class="swiper-slide-content-upper">
-                                                <div class="swiper-slide-content-upper-info">
-                                                    <h3 class="swiper-slide-content-upper-info-title">
-                                                        Силаев Дмитрий Сергеевич
-                                                    </h3>
-                                                    <div class="swiper-slide-content-upper-info-specials">
-                                                        Врач УЗИ, Уролог, Нефролог
-                                                    </div>
+                            <div class="swiper swiper-dropper our-doctors__swiper">
+                                <div class="swiper-wrapper animate-scroll">
+                                    <div class="swiper-slide">
+                                        <div class="swiper-slide-wrapper">
+                                            <div class="swiper-slide-item">
+                                                <div class="swiper-slide-img-container">
+                                                    <img src="./img/doctors-slide-1.png" alt="Доктор"
+                                                        class="swiper-slide-img" />
                                                 </div>
-                                            </div>
-                                            <div class="swiper-slide-content-info">
-                                                <div class="swiper-slide-content-info-experience-reception">
-                                                    <div class="swiper-slide-content-info-experience">
-                                                        <span class="swiper-slide-content-info-experience-text">Стаж
-                                                            работы</span>
-                                                        <span class="swiper-slide-content-info-experience-count">16
-                                                            лет</span>
-                                                    </div>
-                                                    <div class="swiper-slide-content-info-reception">
-                                                        <span class="swiper-slide-content-info-reception-text">Первичный
-                                                            приём</span>
-                                                        <div class="swiper-slide-content-info-reception-price-more">
-                                                            <div
-                                                                class="swiper-slide-content-info-reception-price-more-window price-more-window">
-                                                                <button class="price-more-window-close btn-reset">
-                                                                    <svg width="10" height="10" viewBox="0 0 10 10"
-                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M1 9L9 1M1 1L9 9" stroke="white"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round" />
-                                                                    </svg>
-                                                                </button>
-                                                                <span class="price-more-window-title">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                            d="M21.5999 12C21.5999 17.302 17.3019 21.6 11.9999 21.6C6.69798 21.6 2.3999 17.302 2.3999 12C2.3999 6.69809 6.69798 2.40002 11.9999 2.40002C17.3019 2.40002 21.5999 6.69809 21.5999 12ZM13.1999 7.20002C13.1999 7.86277 12.6627 8.40002 11.9999 8.40002C11.3372 8.40002 10.7999 7.86277 10.7999 7.20002C10.7999 6.53728 11.3372 6.00002 11.9999 6.00002C12.6627 6.00002 13.1999 6.53728 13.1999 7.20002ZM10.7999 10.8C10.1372 10.8 9.59991 11.3373 9.59991 12C9.59991 12.6628 10.1372 13.2 10.7999 13.2V16.8C10.7999 17.4628 11.3372 18 11.9999 18H13.1999C13.8627 18 14.3999 17.4628 14.3999 16.8C14.3999 16.1373 13.8627 15.6 13.1999 15.6V12C13.1999 11.3373 12.6627 10.8 11.9999 10.8H10.7999Z"
-                                                                            fill="#F5F8FB" />
-                                                                    </svg>
-                                                                    Цена приёма
-                                                                </span>
-                                                                <span class="price-more-window-order">Первичный
-                                                                    приём 5000</span>
-                                                                <span class="price-more-window-order">Вторичный
-                                                                    приём 3800</span>
+                                                <div class="swiper-slide-content">
+                                                    <div class="swiper-slide-content-upper">
+                                                        <div class="swiper-slide-content-upper-info">
+                                                            <h3 class="swiper-slide-content-upper-info-title">
+                                                                Силаев Дмитрий Сергеевич
+                                                            </h3>
+                                                            <div class="swiper-slide-content-upper-info-specials">
+                                                                Врач УЗИ, Уролог, Нефролог
                                                             </div>
-                                                            <span class="swiper-slide-content-info-reception-price">3
-                                                                500 ₽</span>
-                                                            <button
-                                                                class="btn-reset swiper-slide-content-info-reception-more price-more-window-open">
-                                                                i
-                                                            </button>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="swiper-slide-content-info-locate">
-                                                    <div class="swiper-slide-content-info-locate-item">
-                                                        <span
-                                                            class="swiper-slide-content-info-locate-item-circle b-red"></span>
-                                                        <span
-                                                            class="swiper-slide-content-info-locate-text">Юго-западная</span>
+                                                    <div class="swiper-slide-content-info">
+                                                        <div class="swiper-slide-content-info-experience-reception">
+                                                            <div class="swiper-slide-content-info-experience">
+                                                                <span
+                                                                    class="swiper-slide-content-info-experience-text">Стаж
+                                                                    работы</span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-experience-count">16
+                                                                    лет</span>
+                                                            </div>
+                                                            <div class="swiper-slide-content-info-reception">
+                                                                <span
+                                                                    class="swiper-slide-content-info-reception-text">Первичный
+                                                                    приём</span>
+                                                                <div
+                                                                    class="swiper-slide-content-info-reception-price-more">
+                                                                    <div
+                                                                        class="swiper-slide-content-info-reception-price-more-window price-more-window">
+                                                                        <button
+                                                                            class="price-more-window-close btn-reset"><svg
+                                                                                width="10" height="10"
+                                                                                viewBox="0 0 10 10" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M1 9L9 1M1 1L9 9"
+                                                                                    stroke="white" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round" />
+                                                                            </svg></button>
+                                                                        <span class="price-more-window-title"><svg
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M21.5999 12C21.5999 17.302 17.3019 21.6 11.9999 21.6C6.69798 21.6 2.3999 17.302 2.3999 12C2.3999 6.69809 6.69798 2.40002 11.9999 2.40002C17.3019 2.40002 21.5999 6.69809 21.5999 12ZM13.1999 7.20002C13.1999 7.86277 12.6627 8.40002 11.9999 8.40002C11.3372 8.40002 10.7999 7.86277 10.7999 7.20002C10.7999 6.53728 11.3372 6.00002 11.9999 6.00002C12.6627 6.00002 13.1999 6.53728 13.1999 7.20002ZM10.7999 10.8C10.1372 10.8 9.59991 11.3373 9.59991 12C9.59991 12.6628 10.1372 13.2 10.7999 13.2V16.8C10.7999 17.4628 11.3372 18 11.9999 18H13.1999C13.8627 18 14.3999 17.4628 14.3999 16.8C14.3999 16.1373 13.8627 15.6 13.1999 15.6V12C13.1999 11.3373 12.6627 10.8 11.9999 10.8H10.7999Z"
+                                                                                    fill="#F5F8FB" />
+                                                                            </svg> Цена приёма
+                                                                        </span>
+                                                                        <span class="price-more-window-order">Первичный
+                                                                            приём 5000</span>
+                                                                        <span class="price-more-window-order">Вторичный
+                                                                            приём 3800</span>
+                                                                    </div>
+                                                                    <span
+                                                                        class="swiper-slide-content-info-reception-price">3
+                                                                        500 ₽</span>
+                                                                    <button
+                                                                        class="btn-reset swiper-slide-content-info-reception-more price-more-window-open">
+                                                                        i
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-slide-content-info-locate">
+                                                            <div class="swiper-slide-content-info-locate-item">
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-item-circle b-red"></span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-text">Юго-западная</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide-content-btn-more">
+                                                        <button
+                                                            class="btn-reset btn-orange swiper-slide-content-popup swiper-slide-content-popup-dropper">
+                                                            Записаться
+                                                        </button>
+                                                        <button class="btn-reset swiper-slide-content-more">
+                                                            i
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide-content-btn-more">
-                                                <button
-                                                    class="btn-reset btn-orange swiper-slide-content-popup-dropper">Записаться</button>
-                                                <button class="btn-reset swiper-slide-content-more">i</button>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="swiper-slide-wrapper">
+                                            <div class="swiper-slide-item">
+                                                <div class="swiper-slide-img-container">
+                                                    <img src="./img/doctors-slide-2.png" alt="Доктор"
+                                                        class="swiper-slide-img" />
+                                                </div>
+                                                <div class="swiper-slide-content">
+                                                    <div class="swiper-slide-content-upper">
+                                                        <div class="swiper-slide-content-upper-info">
+                                                            <h3 class="swiper-slide-content-upper-info-title">
+                                                                Парада Наталья Сергеевна
+                                                            </h3>
+                                                            <div class="swiper-slide-content-upper-info-specials">
+                                                                Гинеколог, Врач
+                                                                УЗИ, Акушер-гинеколог, Сексолог, Специалист по
+                                                                тазовому дну, Урогинеколог
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide-content-info">
+                                                        <div class="swiper-slide-content-info-experience-reception">
+                                                            <div class="swiper-slide-content-info-experience">
+                                                                <span
+                                                                    class="swiper-slide-content-info-experience-text">Стаж
+                                                                    работы</span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-experience-count">24
+                                                                    года</span>
+                                                            </div>
+                                                            <div class="swiper-slide-content-info-reception">
+                                                                <span
+                                                                    class="swiper-slide-content-info-reception-text">Первичный
+                                                                    приём</span>
+                                                                <div
+                                                                    class="swiper-slide-content-info-reception-price-more">
+                                                                    <div
+                                                                        class="swiper-slide-content-info-reception-price-more-window price-more-window">
+                                                                        <button
+                                                                            class="price-more-window-close btn-reset"><svg
+                                                                                width="10" height="10"
+                                                                                viewBox="0 0 10 10" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M1 9L9 1M1 1L9 9"
+                                                                                    stroke="white" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round" />
+                                                                            </svg></button>
+                                                                        <span class="price-more-window-title"><svg
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M21.5999 12C21.5999 17.302 17.3019 21.6 11.9999 21.6C6.69798 21.6 2.3999 17.302 2.3999 12C2.3999 6.69809 6.69798 2.40002 11.9999 2.40002C17.3019 2.40002 21.5999 6.69809 21.5999 12ZM13.1999 7.20002C13.1999 7.86277 12.6627 8.40002 11.9999 8.40002C11.3372 8.40002 10.7999 7.86277 10.7999 7.20002C10.7999 6.53728 11.3372 6.00002 11.9999 6.00002C12.6627 6.00002 13.1999 6.53728 13.1999 7.20002ZM10.7999 10.8C10.1372 10.8 9.59991 11.3373 9.59991 12C9.59991 12.6628 10.1372 13.2 10.7999 13.2V16.8C10.7999 17.4628 11.3372 18 11.9999 18H13.1999C13.8627 18 14.3999 17.4628 14.3999 16.8C14.3999 16.1373 13.8627 15.6 13.1999 15.6V12C13.1999 11.3373 12.6627 10.8 11.9999 10.8H10.7999Z"
+                                                                                    fill="#F5F8FB" />
+                                                                            </svg> Цена приёма
+                                                                        </span>
+                                                                        <span class="price-more-window-order">Первичный
+                                                                            приём 5000</span>
+                                                                        <span class="price-more-window-order">Вторичный
+                                                                            приём 3800</span>
+                                                                    </div>
+                                                                    <span
+                                                                        class="swiper-slide-content-info-reception-price">5
+                                                                        000 ₽</span>
+                                                                    <button
+                                                                        class="btn-reset swiper-slide-content-info-reception-more price-more-window-open">
+                                                                        i
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-slide-content-info-locate">
+                                                            <div class="swiper-slide-content-info-locate-item">
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-item-circle b-red"></span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-text">Юго-западная</span>
+                                                            </div>
+                                                            <div class="swiper-slide-content-info-locate-item">
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-item-circle b-brown"></span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-text">Добрынинская</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide-content-btn-more">
+                                                        <button
+                                                            class="btn-reset btn-orange swiper-slide-content-popup swiper-slide-content-popup-dropper">
+                                                            Записаться
+                                                        </button>
+                                                        <button class="btn-reset swiper-slide-content-more">
+                                                            i
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div> <!-- swiper-slide-content -->
-                                    </div> <!-- swiper-slide-item -->
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="swiper-slide-wrapper">
+                                            <div class="swiper-slide-item">
+                                                <div class="swiper-slide-img-container">
+                                                    <img src="./img/doctors-slide-3.png" alt="Доктор"
+                                                        class="swiper-slide-img" />
+                                                </div>
+                                                <div class="swiper-slide-content">
+                                                    <div class="swiper-slide-content-upper">
+                                                        <div class="swiper-slide-content-upper-info">
+                                                            <h3 class="swiper-slide-content-upper-info-title">
+                                                                Юренев Георгий Леонидович
+                                                            </h3>
+                                                            <div class="swiper-slide-content-upper-info-specials">
+                                                                Терапевт, Пульмонолог
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide-content-info">
+                                                        <div class="swiper-slide-content-info-experience-reception">
+                                                            <div class="swiper-slide-content-info-experience">
+                                                                <span
+                                                                    class="swiper-slide-content-info-experience-text">Стаж
+                                                                    работы</span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-experience-count">34
+                                                                    года</span>
+                                                            </div>
+                                                            <div class="swiper-slide-content-info-reception">
+                                                                <span
+                                                                    class="swiper-slide-content-info-reception-text">Первичный
+                                                                    приём</span>
+                                                                <div
+                                                                    class="swiper-slide-content-info-reception-price-more">
+                                                                    <div
+                                                                        class="swiper-slide-content-info-reception-price-more-window price-more-window">
+                                                                        <button
+                                                                            class="price-more-window-close btn-reset"><svg
+                                                                                width="10" height="10"
+                                                                                viewBox="0 0 10 10" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M1 9L9 1M1 1L9 9"
+                                                                                    stroke="white" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round" />
+                                                                            </svg></button>
+                                                                        <span class="price-more-window-title"><svg
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M21.5999 12C21.5999 17.302 17.3019 21.6 11.9999 21.6C6.69798 21.6 2.3999 17.302 2.3999 12C2.3999 6.69809 6.69798 2.40002 11.9999 2.40002C17.3019 2.40002 21.5999 6.69809 21.5999 12ZM13.1999 7.20002C13.1999 7.86277 12.6627 8.40002 11.9999 8.40002C11.3372 8.40002 10.7999 7.86277 10.7999 7.20002C10.7999 6.53728 11.3372 6.00002 11.9999 6.00002C12.6627 6.00002 13.1999 6.53728 13.1999 7.20002ZM10.7999 10.8C10.1372 10.8 9.59991 11.3373 9.59991 12C9.59991 12.6628 10.1372 13.2 10.7999 13.2V16.8C10.7999 17.4628 11.3372 18 11.9999 18H13.1999C13.8627 18 14.3999 17.4628 14.3999 16.8C14.3999 16.1373 13.8627 15.6 13.1999 15.6V12C13.1999 11.3373 12.6627 10.8 11.9999 10.8H10.7999Z"
+                                                                                    fill="#F5F8FB" />
+                                                                            </svg> Цена приёма
+                                                                        </span>
+                                                                        <span class="price-more-window-order">Первичный
+                                                                            приём 5000</span>
+                                                                        <span class="price-more-window-order">Вторичный
+                                                                            приём 3800</span>
+                                                                    </div>
+                                                                    <span
+                                                                        class="swiper-slide-content-info-reception-price">10
+                                                                        000 ₽</span>
+                                                                    <button
+                                                                        class="btn-reset swiper-slide-content-info-reception-more price-more-window-open">
+                                                                        i
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-slide-content-info-locate">
+                                                            <div class="swiper-slide-content-info-locate-item">
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-item-circle b-red"></span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-text">Чистые
+                                                                    пруды</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide-content-btn-more">
+                                                        <button
+                                                            class="btn-reset btn-orange swiper-slide-content-popup swiper-slide-content-popup-dropper">
+                                                            Записаться
+                                                        </button>
+                                                        <button class="btn-reset swiper-slide-content-more">
+                                                            i
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="swiper-slide-wrapper">
+                                            <div class="swiper-slide-item">
+                                                <div class="swiper-slide-img-container">
+                                                    <img src="./img/doctors-slide-4.png" alt="Доктор"
+                                                        class="swiper-slide-img" />
+                                                </div>
+                                                <div class="swiper-slide-content">
+                                                    <div class="swiper-slide-content-upper">
+                                                        <div class="swiper-slide-content-upper-info">
+                                                            <h3 class="swiper-slide-content-upper-info-title">
+                                                                Ворожцова Наталья Николаевна
+                                                            </h3>
+                                                            <div class="swiper-slide-content-upper-info-specials">
+                                                                Гинеколог, Врач УЗИ, Гинеколог-эндокринолог
+                                                                Акушер-гинеколог
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide-content-info">
+                                                        <div class="swiper-slide-content-info-experience-reception">
+                                                            <div class="swiper-slide-content-info-experience">
+                                                                <span
+                                                                    class="swiper-slide-content-info-experience-text">Стаж
+                                                                    работы</span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-experience-count">20
+                                                                    года</span>
+                                                            </div>
+                                                            <div class="swiper-slide-content-info-reception">
+                                                                <span
+                                                                    class="swiper-slide-content-info-reception-text">Первичный
+                                                                    приём</span>
+                                                                <div
+                                                                    class="swiper-slide-content-info-reception-price-more">
+                                                                    <div
+                                                                        class="swiper-slide-content-info-reception-price-more-window price-more-window">
+                                                                        <button
+                                                                            class="price-more-window-close btn-reset"><svg
+                                                                                width="10" height="10"
+                                                                                viewBox="0 0 10 10" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M1 9L9 1M1 1L9 9"
+                                                                                    stroke="white" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round" />
+                                                                            </svg></button>
+                                                                        <span class="price-more-window-title"><svg
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M21.5999 12C21.5999 17.302 17.3019 21.6 11.9999 21.6C6.69798 21.6 2.3999 17.302 2.3999 12C2.3999 6.69809 6.69798 2.40002 11.9999 2.40002C17.3019 2.40002 21.5999 6.69809 21.5999 12ZM13.1999 7.20002C13.1999 7.86277 12.6627 8.40002 11.9999 8.40002C11.3372 8.40002 10.7999 7.86277 10.7999 7.20002C10.7999 6.53728 11.3372 6.00002 11.9999 6.00002C12.6627 6.00002 13.1999 6.53728 13.1999 7.20002ZM10.7999 10.8C10.1372 10.8 9.59991 11.3373 9.59991 12C9.59991 12.6628 10.1372 13.2 10.7999 13.2V16.8C10.7999 17.4628 11.3372 18 11.9999 18H13.1999C13.8627 18 14.3999 17.4628 14.3999 16.8C14.3999 16.1373 13.8627 15.6 13.1999 15.6V12C13.1999 11.3373 12.6627 10.8 11.9999 10.8H10.7999Z"
+                                                                                    fill="#F5F8FB" />
+                                                                            </svg> Цена приёма
+                                                                        </span>
+                                                                        <span class="price-more-window-order">Первичный
+                                                                            приём 5000</span>
+                                                                        <span class="price-more-window-order">Вторичный
+                                                                            приём 3800</span>
+                                                                    </div>
+                                                                    <span
+                                                                        class="swiper-slide-content-info-reception-price">5
+                                                                        000 ₽</span>
+                                                                    <button
+                                                                        class="btn-reset swiper-slide-content-info-reception-more price-more-window-open">
+                                                                        i
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-slide-content-info-locate">
+                                                            <div class="swiper-slide-content-info-locate-item">
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-item-circle b-red"></span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-text">Чистые
+                                                                    пруды</span>
+                                                            </div>
+                                                            <div class="swiper-slide-content-info-locate-item">
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-item-circle b-brown"></span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-text">Добрынинская</span>
+                                                            </div>
+                                                            <div class="swiper-slide-content-info-locate-item">
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-item-circle b-green"></span>
+                                                                <span
+                                                                    class="swiper-slide-content-info-locate-text">Тверская</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-slide-content-btn-more">
+                                                        <button
+                                                            class="btn-reset btn-orange swiper-slide-content-popup swiper-slide-content-popup-dropper">
+                                                            Записаться
+                                                        </button>
+                                                        <button class="btn-reset swiper-slide-content-more">
+                                                            i
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-
-                                </div> <!-- swiper-wrapper -->
-                            </div> <!-- swiper -->
-                        </div> <!-- our-doctors__info -->
-                    </div> <!-- our-doctors__content -->
-                </div> <!-- container -->
+                                </div> <!-- swiper -->
+                            </div> <!-- our-doctors__info -->
+                        </div> <!-- our-doctors__content -->
+                    </div> <!-- container -->
             </section>
         </div>
     </div>
@@ -17901,11 +18235,11 @@
                 overlay.style.display = "block";
                 document.body.classList.add("no-scroll");
 
-                // Показать форму входа, скрыть регистрацию
+
                 document.getElementById("loginFormDropper").style.display = "block";
                 document.getElementById("registerFormDropper").style.display = "none";
 
-                // Удалить предыдущее сообщение, если было
+
                 const msg = document.querySelector('.register-msg');
                 if (msg) msg.remove();
 
@@ -18183,6 +18517,85 @@
                 document.body.classList.remove("no-scroll");
             });
         });
+        new Swiper('.our-doctors__swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: false,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        const prevDayEl = document.getElementById("prevDay");
+        const currentDayEl = document.getElementById("currentDay");
+        const nextDayEl = document.getElementById("nextDay");
+
+        let currentDate = new Date();
+
+        const formatDate = (date) => {
+            return date.toLocaleDateString('ru-RU', {
+                day: 'numeric',
+                month: 'long'
+            });
+        };
+
+        const updateDays = () => {
+            const prev = new Date(currentDate);
+            prev.setDate(prev.getDate() - 1);
+
+            const next = new Date(currentDate);
+            next.setDate(next.getDate() + 1);
+
+            prevDayEl.textContent = formatDate(prev);
+            currentDayEl.textContent = formatDate(currentDate);
+            nextDayEl.textContent = formatDate(next);
+        };
+
+        document.querySelector('.arrow-prev').addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() - 1);
+            updateDays();
+        });
+
+        document.querySelector('.arrow-next').addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() + 1);
+            updateDays();
+        });
+
+        updateDays();
+        const selector = document.getElementById("placeSelector");
+        const options = document.getElementById("metroOptions");
+        const metroText = document.getElementById("metroText");
+        const metroColor = document.getElementById("metroColor");
+        const metroAddress = document.getElementById("metroAddress");
+        selector.addEventListener("click", (e) => {
+            e.stopPropagation();
+            options.style.display = options.style.display === "block" ? "none" : "block";
+        });
+        options.querySelectorAll(".option").forEach(option => {
+            option.addEventListener("click", (e) => {
+                const metro = option.getAttribute("data-metro");
+                const color = option.getAttribute("data-color");
+                const address = option.getAttribute("data-address");
+
+                metroText.textContent = metro;
+                metroColor.className = `status-indicator ${color}`;
+                metroAddress.textContent = address;
+                options.style.display = "none";
+            });
+        });
+        const timeButtons = document.querySelectorAll(".modal-new-note-original-info-upper-times-btn");
+
+        timeButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                timeButtons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+            });
+        });
+      
 
     </script>
 </body>

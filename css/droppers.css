@@ -198,6 +198,22 @@
     color: #007B99;
 }
 
+
+.our-doctors__swiper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    display: flex;
+}
+
+.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .pagination li.active {
     color: #F97316;
     font-size: 21px;
@@ -406,7 +422,7 @@
 
     .buttons-dropper-cart .swiper-slide-content-more::before {
         content: "i";
-        font-size: 16px;
+        font-size: 32px;
         color: inherit;
         position: absolute;
 
@@ -423,6 +439,7 @@
 
     .header-dropper-cart .desc {
         font-size: 12px;
+        line-height: 13px;
     }
 
     .name-subname .name {
